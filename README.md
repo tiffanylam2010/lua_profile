@@ -3,6 +3,11 @@ Lua CPU Profile
 对指定的Lua函数进行profile，输出该函数调用的各子函数的运行占用时间。
 
 
+## 实现原理
+利用lua的lua_sethook API来监控函数调用，把函数调用开始和结束的相关数据记录到共享内存中。
+运行结束后，再通过python脚本（parse.py）分析共享内存中的数据统计出函数调用的时间和调用关系。
+
+
 ## 编译
 * 修改makeme.sh中的lua路径，运行makeme.sh；生成cpu_profile.so和storage.so
   cpu_profile.so 供lua模块使用
@@ -74,9 +79,6 @@ total profile_time: 3.365 sec
 * %self_time: self_time占所有函数self_time总和的百分百比
 * total_time: 函数调用包括子函数调用的总时间，有时候会比第一行的时间还长，因为包含了递归调用的时间。
 * function: 文件名:行号:函数名
-
-## 实现原理
-（有空再补充）
 
 ## TODO
 (有空再补充)
