@@ -1,4 +1,4 @@
-local profile = require "cpu_profile"
+local profile = require "time_profile"
 
 local function  bar()
     local k = 0
@@ -31,8 +31,5 @@ end
 profile.init() -- 需要进行一次初始化操作
 profile.profile(test, 3) -- 可多次profile一个函数
 profile.profile(test, 5)
+profile.stats()
 
---profile.dump_stats()
-
--- 执行完毕后，profile的调用数据栈放在共享内存中
--- 需要运行python parse.py 来分析输出结果
